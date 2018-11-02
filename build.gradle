@@ -24,6 +24,7 @@ buildscript {
         roomVersion = '2.1.0-alpha01'
         supportLibVersion = '1.0.0'
         constraintLayoutVersion = '2.0.0-alpha2'
+        butterKniefVersion = '9.0.0-rc1'
     }
 }
 
