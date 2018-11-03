@@ -16,6 +16,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true;
+    }
 }
 
 dependencies {
@@ -28,13 +31,7 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
 
-    //ButterKnife
-    implementation "com.jakewharton:butterknife:$rootProject.butterKniefVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKniefVersion"
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-//    androidTestImplementation "android.arch.percistence.room:testing:$rootProject.roomVersion"
-//    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
 }
