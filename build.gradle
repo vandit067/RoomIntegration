@@ -21,10 +21,10 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
-        roomVersion = '2.1.0-alpha01'
-        supportLibVersion = '1.0.0'
+        roomVersion = '2.1.0-alpha02'
+        supportLibVersion = '1.0.2'
         constraintLayoutVersion = '2.0.0-alpha2'
-        butterKniefVersion = '9.0.0-rc1'
+        lifecycleVersion = '2.0.0'
     }
 }
 

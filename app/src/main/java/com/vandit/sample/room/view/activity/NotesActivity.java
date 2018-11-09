@@ -1,29 +1,39 @@
-package com.vandit.sample.room;
+package com.vandit.sample.room.view.activity;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.vandit.sample.room.R;
+import com.vandit.sample.room.viewmodel.NoteViewModel;
+import com.vandit.sample.room.database.entity.Notes;
 import com.vandit.sample.room.databinding.ActivityNotesBinding;
+
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 public class NotesActivity extends AppCompatActivity {
 
+    private NoteViewModel mNoteViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityNotesBinding activityNotesBinding = DataBindingUtil.setContentView(this, R.layout.activity_notes);
+        final ActivityNotesBinding activityNotesBinding = DataBindingUtil.setContentView(this, R.layout.activity_notes);
+        // We are not creating instance of ViewModel class here.
+        this.mNoteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
+        // Bind ViewModel class
+        activityNotesBinding.setNotesViewModel(this.mNoteViewModel);
         setSupportActionBar(activityNotesBinding.toolbar);
 
-        activityNotesBinding.fab.setOnClickListener(new View.OnClickListener() {
+        mNoteViewModel.getAllNotes().observe(this, new Observer<List<Notes>>() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onChanged(List<Notes> notes) {
+                Toast.makeText(NotesActivity.this, "Data Changed", Toast.LENGTH_SHORT).show();
             }
         });
     }

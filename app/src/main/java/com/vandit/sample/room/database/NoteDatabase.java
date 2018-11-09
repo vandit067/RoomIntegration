@@ -20,13 +20,10 @@ public abstract class NoteDatabase extends RoomDatabase {
 
     public abstract NotesDao notesDao();
 
-    public static NoteDatabase getInstance(@NonNull Context context) {
+    public static synchronized NoteDatabase getInstance(@NonNull Context context) {
         if(INSTANCE == null){
-            synchronized (NoteDatabase.class){
-                if(INSTANCE == null){
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), NoteDatabase.class, "Notes.db").build();
-                }
-            }
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), NoteDatabase.class, "Notes.db")
+                    .build();
         }
         return INSTANCE;
     }

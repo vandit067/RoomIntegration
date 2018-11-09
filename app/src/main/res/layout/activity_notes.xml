@@ -3,10 +3,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="notesViewModel"
+            type="com.vandit.sample.room.viewmodel.NoteViewModel"/>
+    </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".NotesActivity">
+        tools:context=".view.activity.NotesActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -30,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
+            app:srcCompat="@android:drawable/ic_dialog_email"
+            android:onClick="@{() -> notesViewModel.onCreateNotesClick()}"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

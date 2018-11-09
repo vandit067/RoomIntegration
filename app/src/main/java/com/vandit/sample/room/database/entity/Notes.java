@@ -19,6 +19,12 @@ public class Notes {
     @ColumnInfo(name = "color")
     private String color;
 
+    public Notes(String title, String noteDetails, String color) {
+        this.title = title;
+        this.noteDetails = noteDetails;
+        this.color = color;
+    }
+
     public int getId() {
         return id;
     }
@@ -31,23 +37,11 @@ public class Notes {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getNoteDetails() {
         return noteDetails;
     }
 
-    public void setNoteDetails(String noteDetails) {
-        this.noteDetails = noteDetails;
-    }
-
     public String getColor() {
         return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 }
