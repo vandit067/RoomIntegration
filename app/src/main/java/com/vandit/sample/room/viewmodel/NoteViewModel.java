@@ -34,7 +34,12 @@ public class NoteViewModel extends AndroidViewModel {
         return allNotes;
     }
 
+    public void addNote(Notes notes){
+        notesRepository.insertOrUpdate(notes);
+    }
+
     public void onCreateNotesClick(){
         // Open intent for CreateNotesActivity
+
     }
 }

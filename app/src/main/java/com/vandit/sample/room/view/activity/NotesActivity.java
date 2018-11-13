@@ -6,20 +6,25 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.vandit.sample.room.R;
-import com.vandit.sample.room.viewmodel.NoteViewModel;
 import com.vandit.sample.room.database.entity.Notes;
 import com.vandit.sample.room.databinding.ActivityNotesBinding;
+import com.vandit.sample.room.view.adapter.NotesAdapter;
+import com.vandit.sample.room.viewmodel.NoteViewModel;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class NotesActivity extends AppCompatActivity {
 
     private NoteViewModel mNoteViewModel;
+    private NotesAdapter mNotesAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +34,29 @@ public class NotesActivity extends AppCompatActivity {
         // Bind ViewModel class
         activityNotesBinding.setNotesViewModel(this.mNoteViewModel);
         setSupportActionBar(activityNotesBinding.toolbar);
-
+        activityNotesBinding.activityNotesRvNotes.setHasFixedSize(true);
+        activityNotesBinding.activityNotesRvNotes.setLayoutManager(new LinearLayoutManager(this));
         mNoteViewModel.getAllNotes().observe(this, new Observer<List<Notes>>() {
             @Override
-            public void onChanged(List<Notes> notes) {
-                Toast.makeText(NotesActivity.this, "Data Changed", Toast.LENGTH_SHORT).show();
+            public void onChanged(@NonNull List<Notes> notes) {
+                setNotesData(notes, activityNotesBinding);
             }
         });
+    }
+
+    private void setNotesData(@NonNull List<Notes> notes, @NonNull ActivityNotesBinding activityNotesBinding) {
+        if (notes.isEmpty()) {
+            return;
+        }
+        if (this.mNotesAdapter == null) {
+            this.mNotesAdapter = new NotesAdapter(notes);
+            activityNotesBinding.activityNotesRvNotes.setAdapter(this.mNotesAdapter);
+            return;
+        }
+
+        this.mNotesAdapter.notifyDataSetChanged();
+
+        Toast.makeText(NotesActivity.this, "Data Changed", Toast.LENGTH_SHORT).show();
     }
 
     @Override

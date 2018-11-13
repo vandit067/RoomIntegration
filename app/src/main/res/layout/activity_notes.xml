@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="notesViewModel"
-            type="com.vandit.sample.room.viewmodel.NoteViewModel"/>
+            type="com.vandit.sample.room.viewmodel.NoteViewModel" />
     </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -30,9 +33,11 @@
         <!--<include layout="@layout/content_notes" />-->
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_notes_rv_notes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_note"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_note" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -40,8 +45,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@drawable/ic_note_add_24dp"
-            android:onClick="@{() -> notesViewModel.onCreateNotesClick()}"/>
+            android:onClick="@{() -> notesViewModel.onCreateNotesClick()}"
+            app:layout_anchor="@id/activity_notes_rv_notes"
+            app:layout_anchorGravity="bottom|end|right"
+            app:srcCompat="@drawable/ic_note_add_24dp" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

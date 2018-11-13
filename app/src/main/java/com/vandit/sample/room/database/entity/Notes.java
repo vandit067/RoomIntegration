@@ -22,12 +22,6 @@ public class Notes {
     @ColumnInfo(name = "is_secure_note")
     private boolean isSecureNote;
 
-    public Notes(String title, String noteDetails, String color) {
-        this.title = title;
-        this.noteDetails = noteDetails;
-        this.color = color;
-    }
-
     public Notes(String title, String noteDetails, boolean isSecureNote) {
         this.title = title;
         this.noteDetails = noteDetails;
@@ -52,6 +46,10 @@ public class Notes {
 
     public String getColor() {
         return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public boolean isSecureNote() {
