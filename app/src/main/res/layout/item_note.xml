@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="obj"
+            type="com.vandit.sample.room.database.entity.Notes"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="2dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardElevation="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_note_tv_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:layout_toStartOf="@id/item_note_ib_secure"
+                android:text="@{obj.title}"
+                android:layout_marginTop="5dp"
+                android:lines="1"
+                android:textColor="@android:color/black"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_note_tv_description"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:text="@{obj.noteDetails}"
+                android:maxLines="4"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/item_note_tv_title"
+                android:ellipsize="end"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@{obj.secureNote ? @drawable/ic_lock_24dp : @drawable/ic_unlock_24dp}"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/item_note_ib_secure"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
